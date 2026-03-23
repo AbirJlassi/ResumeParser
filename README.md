@@ -1,4 +1,4 @@
-# CV Parser — Pipeline Hybride Stratifié
+# CV Parser : Pipeline Hybride 
 
 Extraction structurée de CVs en plusieurs couches ordonnées par fiabilité : Regex → NER → LLM → Post-processing. Supporte PDF (natif et scanné), DOCX, TXT et images. Inclut un évaluateur de performance avec rapport HTML.
 
