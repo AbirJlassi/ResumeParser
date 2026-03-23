@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rapport — CV Pipeline</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #0d0f14;
+    --surface:  #13161e;
+    --border:   #1e2330;
+    --border2:  #262c3d;
+    --text:     #c8cdd8;
+    --muted:    #5a6278;
+    --heading:  #eaedf5;
+    --accent:   #5b8dee;
+    --accent2:  #3ecf8e;
+    --accent3:  #e8744a;
+    --tag-bg:   #1a2035;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.7;
+    padding: 3rem 1.5rem 6rem;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  .header {
+    border-bottom: 1px solid var(--border2);
+    padding-bottom: 2rem;
+    margin-bottom: 3rem;
+  }
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: .6rem;
+  }
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--heading);
+    letter-spacing: -.02em;
+    line-height: 1.2;
+    margin-bottom: .5rem;
+  }
+  .header-sub {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  /* ── File Tabs ── */
+  .file-tabs {
+    display: flex;
+    gap: .5rem;
+    margin-bottom: 2.5rem;
+  }
+  .file-tab {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    padding: .35rem .85rem;
+    border-radius: 6px;
+    border: 1px solid var(--border2);
+    color: var(--muted);
+    background: var(--surface);
+    cursor: default;
+  }
+  .file-tab.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(91,141,238,.08);
+  }
+
+  /* ── Section ── */
+  .section { margin-bottom: 3rem; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin-bottom: 1.25rem;
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    background: rgba(91,141,238,.1);
+    border: 1px solid rgba(91,141,238,.2);
+    border-radius: 4px;
+    padding: .15rem .55rem;
+    letter-spacing: .06em;
+  }
+  h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--heading);
+    letter-spacing: -.01em;
+  }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.1rem 1.4rem;
+    margin-bottom: .75rem;
+  }
+  .card-title {
+    font-weight: 500;
+    color: var(--heading);
+    margin-bottom: .3rem;
+    font-size: 13.5px;
+  }
+  .card p { color: var(--text); font-size: 13px; }
+  .card-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .75rem;
+  }
+
+  /* ── Pipeline ── */
+  .pipeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .pipe-step {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 0;
+    position: relative;
+  }
+  .pipe-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 89px;
+    top: 100%;
+    width: 2px;
+    height: .75rem;
+    background: var(--border2);
+  }
+  .pipe-step + .pipe-step { margin-top: .75rem; }
+  .pipe-label {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 8px 0 0 8px;
+    padding: .75rem 1rem;
+    border-right: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .pipe-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin-bottom: .2rem;
+  }
+  .pipe-name {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--heading);
+  }
+  .pipe-body {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 0 8px 8px 0;
+    padding: .75rem 1.1rem;
+    font-size: 12.5px;
+  }
+  .pipe-body strong { color: var(--heading); font-weight: 500; }
+  .pipe-step.c0 .pipe-num { color: var(--muted); }
+  .pipe-step.c1 .pipe-num { color: var(--accent2); }
+  .pipe-step.c2 .pipe-num { color: var(--accent); }
+  .pipe-step.c3 .pipe-num { color: var(--accent3); }
+  .pipe-step.c4 .pipe-num { color: #c084fc; }
+
+  /* ── Fields table ── */
+  .fields-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: .5rem;
+  }
+  .field-chip {
+    background: var(--tag-bg);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: .4rem .75rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 11.5px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+  .field-chip .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-scalar { background: var(--accent2); }
+  .dot-list   { background: var(--accent); }
+  .dot-struct { background: var(--accent3); }
+
+  /* ── Models table ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+  th {
+    text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: .5rem .75rem;
+    border-bottom: 1px solid var(--border2);
+  }
+  td {
+    padding: .6rem .75rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,.015); }
+  .model-id {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+  }
+  .badge {
+    display: inline-block;
+    padding: .1rem .45rem;
+    border-radius: 4px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .04em;
+  }
+  .badge-prod    { background: rgba(62,207,142,.1); color: var(--accent2); border: 1px solid rgba(62,207,142,.2); }
+  .badge-preview { background: rgba(232,116,74,.1); color: var(--accent3); border: 1px solid rgba(232,116,74,.2); }
+
+  /* ── Metrics ── */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .75rem;
+  }
+  .metric-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+    text-align: center;
+  }
+  .metric-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: .4rem;
+  }
+  .metric-value {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--heading);
+    letter-spacing: -.02em;
+  }
+  .metric-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: .2rem;
+  }
+
+  /* ── Priority table ── */
+  .prio-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .prio-table td, .prio-table th {
+    padding: .55rem .8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .prio-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border2);
+  }
+  .field-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 11.5px;
+    color: var(--heading);
+  }
+  .prio-chain {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    flex-wrap: wrap;
+  }
+  .prio-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    padding: .15rem .5rem;
+    border-radius: 4px;
+  }
+  .prio-regex  { background: rgba(62,207,142,.1);  color: var(--accent2); border: 1px solid rgba(62,207,142,.2); }
+  .prio-ner    { background: rgba(91,141,238,.1);  color: var(--accent);  border: 1px solid rgba(91,141,238,.2); }
+  .prio-llm    { background: rgba(232,116,74,.1);  color: var(--accent3); border: 1px solid rgba(232,116,74,.2); }
+  .arrow { color: var(--muted); font-size: 10px; }
+
+  /* ── File header ── */
+  .file-header {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    padding: .75rem 1.1rem;
+    margin-bottom: 2rem;
+  }
+  .file-icon {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    background: rgba(62,207,142,.08);
+    border: 1px solid rgba(62,207,142,.15);
+    padding: .2rem .5rem;
+    border-radius: 4px;
+  }
+  .file-name { font-weight: 500; color: var(--heading); font-size: 13.5px; }
+  .file-desc { color: var(--muted); font-size: 12px; margin-left: auto; }
+
+  /* ── Divider ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border2);
+    margin: 3rem 0;
+  }
+
+  code {
+    font-family: 'DM Mono', monospace;
+    font-size: 11.5px;
+    background: var(--tag-bg);
+    padding: .1rem .35rem;
+    border-radius: 3px;
+    color: var(--accent);
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-label">Documentation technique</div>
+    <h1>CV Parser — Pipeline Hybride Stratifié</h1>
+    <div class="header-sub">cv_parser.py &nbsp;·&nbsp; cv_evaluator.py &nbsp;·&nbsp; Mars 2026</div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- FICHIER 1 : cv_parser.py -->
+  <!-- ════════════════════════════════════════════════════ -->
+
+  <div class="file-header">
+    <span class="file-icon">PY</span>
+    <span class="file-name">cv_parser.py</span>
+    <span class="file-desc">Parser principal — extraction & structuration</span>
+  </div>
+
+  <!-- Architecture -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Architecture du pipeline</h2>
+    </div>
+    <div class="pipeline">
+
+      <div class="pipe-step c0">
+        <div class="pipe-label">
+          <div class="pipe-num">Couche 0</div>
+          <div class="pipe-name">TextExtractor</div>
+        </div>
+        <div class="pipe-body">
+          Ingestion multi-format. PDF natif via <strong>pdfminer</strong>, bascule automatique en <strong>OCR Tesseract</strong> si le texte extrait est inférieur à 50 caractères (PDF scanné). DOCX via <strong>python-docx</strong> avec extraction des tableaux. Images (JPG, PNG, WEBP, TIFF) via OCR direct. Retourne le texte brut + la méthode utilisée.
+        </div>
+      </div>
+
+      <div class="pipe-step c1">
+        <div class="pipe-label">
+          <div class="pipe-num">Couche 1</div>
+          <div class="pipe-name">RegexExtractor</div>
+        </div>
+        <div class="pipe-body">
+          Extraction déterministe haute précision : <strong>email</strong> (RFC 5321), <strong>téléphone</strong> (formats FR/international avec exclusion des faux positifs), <strong>LinkedIn</strong> et <strong>GitHub</strong> (URL normalisée). Toujours exécutée en premier — ses résultats priment sur toutes les couches suivantes.
+        </div>
+      </div>
+
+      <div class="pipe-step c2">
+        <div class="pipe-label">
+          <div class="pipe-num">Couche 2</div>
+          <div class="pipe-name">NERExtractor</div>
+        </div>
+        <div class="pipe-body">
+          Reconnaissance d'entités nommées via <strong>spaCy</strong>. Cibles : <code>PER</code> → nom du candidat (2 mots min, initiaux majuscules), <code>GPE/LOC</code> → localisation, <code>ORG</code> → entreprises et écoles (avec blacklist des faux positifs : Python, Docker, etc.). Charge le meilleur modèle disponible selon une liste de priorité FR → EN.
+        </div>
+      </div>
+
+      <div class="pipe-step c3">
+        <div class="pipe-label">
+          <div class="pipe-num">Couche 3</div>
+          <div class="pipe-name">LLMExtractor</div>
+        </div>
+        <div class="pipe-body">
+          Extraction sémantique via <strong>Groq API</strong>. Reçoit le texte brut + les champs déjà extraits (couches 1 & 2) comme contexte enrichi dans le prompt — réduit les hallucinations. Structured output prompting avec JSON schema explicite. Troncature intelligente au dernier saut de ligne (limite : 60 000 chars pour tous les modèles à 131k tokens de contexte).
+        </div>
+      </div>
+
+      <div class="pipe-step c4">
+        <div class="pipe-label">
+          <div class="pipe-num">Couche 4</div>
+          <div class="pipe-name">PostProcessor</div>
+        </div>
+        <div class="pipe-body">
+          Fusion avec règles de priorité par champ, validation croisée (valeurs LLM vérifiées dans le texte source), normalisation (lowercase skills, déduplication certifications, strings vides → null). Génère les métadonnées <code>_extraction_meta</code> listant les champs où Regex/NER a écrasé le LLM.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modèle de données -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Modèle de données — CVData</h2>
+    </div>
+    <div class="fields-grid">
+      <div class="field-chip"><span class="dot dot-scalar"></span>full_name</div>
+      <div class="field-chip"><span class="dot dot-scalar"></span>email</div>
+      <div class="field-chip"><span class="dot dot-scalar"></span>phone</div>
+      <div class="field-chip"><span class="dot dot-scalar"></span>location</div>
+      <div class="field-chip"><span class="dot dot-scalar"></span>linkedin</div>
+      <div class="field-chip"><span class="dot dot-scalar"></span>github</div>
+      <div class="field-chip"><span class="dot dot-scalar"></span>summary</div>
+      <div class="field-chip"><span class="dot dot-list"></span>skills [ ]</div>
+      <div class="field-chip"><span class="dot dot-list"></span>certifications [ ]</div>
+      <div class="field-chip"><span class="dot dot-list"></span>languages [ ]</div>
+      <div class="field-chip"><span class="dot dot-struct"></span>experiences [ {} ]</div>
+      <div class="field-chip"><span class="dot dot-struct"></span>education [ {} ]</div>
+    </div>
+    <div style="display:flex;gap:1.2rem;margin-top:.75rem;font-size:11.5px;color:var(--muted);">
+      <span><span class="dot dot-scalar" style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent2);margin-right:.3rem;vertical-align:middle"></span>Scalaire</span>
+      <span><span class="dot dot-list" style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:.3rem;vertical-align:middle"></span>Liste plate</span>
+      <span><span class="dot dot-struct" style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent3);margin-right:.3rem;vertical-align:middle"></span>Liste structurée</span>
+    </div>
+  </div>
+
+  <!-- Règles de priorité -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Règles de priorité par champ</h2>
+    </div>
+    <table class="prio-table">
+      <thead>
+        <tr><th>Champ</th><th>Priorité</th><th>Validation croisée</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="field-name">email · phone<br>linkedin · github</td>
+          <td>
+            <div class="prio-chain">
+              <span class="prio-tag prio-regex">Regex</span>
+              <span class="arrow">›</span>
+              <span class="prio-tag prio-llm">LLM</span>
+            </div>
+          </td>
+          <td style="font-size:12px;">Valeur LLM vérifiée dans le texte source avant acceptation. Si absente → invalidée.</td>
+        </tr>
+        <tr>
+          <td class="field-name">full_name · location</td>
+          <td>
+            <div class="prio-chain">
+              <span class="prio-tag prio-ner">NER</span>
+              <span class="arrow">›</span>
+              <span class="prio-tag prio-llm">LLM</span>
+            </div>
+          </td>
+          <td style="font-size:12px;">Regex non applicable (pas de pattern fixe).</td>
+        </tr>
+        <tr>
+          <td class="field-name">skills · summary<br>experiences · education<br>languages · certifications</td>
+          <td>
+            <div class="prio-chain">
+              <span class="prio-tag prio-llm">LLM uniquement</span>
+            </div>
+          </td>
+          <td style="font-size:12px;">Champs sémantiques — seul le LLM peut les extraire correctement.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modèles -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>CVParserFactory — Modèles disponibles</h2>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Méthode</th>
+          <th>Modèle</th>
+          <th>Vitesse</th>
+          <th>Prix (input)</th>
+          <th>Usage recommandé</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>fast()</code></td>
+          <td><span class="model-id">llama-3.1-8b-instant</span></td>
+          <td>560 t/s</td>
+          <td>$0.05/1M</td>
+          <td><span class="badge badge-prod">PROD</span> Volume, CVs standards</td>
+        </tr>
+        <tr>
+          <td><code>accurate()</code></td>
+          <td><span class="model-id">llama-3.3-70b-versatile</span></td>
+          <td>280 t/s</td>
+          <td>$0.59/1M</td>
+          <td><span class="badge badge-prod">PROD</span> Qualité, CVs complexes</td>
+        </tr>
+        <tr>
+          <td><code>fastest()</code></td>
+          <td><span class="model-id">openai/gpt-oss-20b</span></td>
+          <td>1000 t/s</td>
+          <td>$0.075/1M</td>
+          <td><span class="badge badge-prod">PROD</span> APIs temps réel</td>
+        </tr>
+        <tr>
+          <td><code>best()</code></td>
+          <td><span class="model-id">openai/gpt-oss-120b</span></td>
+          <td>500 t/s</td>
+          <td>$0.15/1M</td>
+          <td><span class="badge badge-prod">PROD</span> Qualité maximale</td>
+        </tr>
+        <tr>
+          <td><code>multilingual()</code></td>
+          <td><span class="model-id">qwen/qwen3-32b</span></td>
+          <td>400 t/s</td>
+          <td>$0.29/1M</td>
+          <td><span class="badge badge-preview">PREVIEW</span> FR / AR / EN</td>
+        </tr>
+        <tr>
+          <td><code>custom(model)</code></td>
+          <td style="color:var(--muted);font-style:italic">libre</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Tests et expérimentations</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:.75rem;font-size:11.5px;color:var(--muted);">
+      Tous les modèles production disposent d'un contexte de 131 072 tokens → limite pratique fixée à 60 000 chars de texte CV.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- FICHIER 2 : cv_evaluator.py -->
+  <!-- ════════════════════════════════════════════════════ -->
+
+  <div class="file-header">
+    <span class="file-icon" style="color:var(--accent3);background:rgba(232,116,74,.08);border-color:rgba(232,116,74,.15);">PY</span>
+    <span class="file-name">cv_evaluator.py</span>
+    <span class="file-desc">Benchmark & reporting</span>
+  </div>
+
+  <!-- Métriques -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>Système de métriques</h2>
+    </div>
+    <div class="card-row">
+      <div class="card">
+        <div class="card-title">Champs scalaires</div>
+        <p>Exact Match après normalisation (lowercase + strip). Couvre : full_name, email, phone, location, linkedin, github. Score entre 0 et 1 par champ.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Champs liste</div>
+        <p>Precision / Recall / F1 sur ensembles normalisés. Couvre : skills, certifications, experiences (clé : title), education (clé : degree).</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:.75rem;">
+      <div class="card-title">Agrégation</div>
+      <p>Moyenne sur l'ensemble du dataset pour chaque champ. Les CVs en erreur reçoivent des scores à zéro sans interrompre le benchmark. Le compteur <code>failed_parses</code> trace les échecs.</p>
+    </div>
+  </div>
+
+  <!-- Benchmark runner -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2>Benchmark runner</h2>
+    </div>
+    <div class="card">
+      <div class="card-title">Format ground_truth.json</div>
+      <p>Chaque entrée du dataset contient un <code>id</code>, soit un champ <code>text</code> (texte inline) soit un champ <code>file</code> (chemin fichier), et un objet <code>expected</code> avec les valeurs attendues. Le mode <code>text</code> appelle directement <code>parse_text()</code> — pas de fichier temporaire.</p>
+    </div>
+    <div class="card" style="margin-top:.75rem;">
+      <div class="card-title">Sortie console</div>
+      <p>Ligne par CV : statut (✅ / ⚠️ / ❌), nombre de champs scalaires corrects, F1 moyen des listes, latence. Rapport agrégé en fin de run avec barres de progression ASCII.</p>
+    </div>
+  </div>
+
+  <!-- Sorties -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2>Sorties générées</h2>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">Console</div>
+        <div class="metric-value" style="font-size:1.1rem;">Tableau</div>
+        <div class="metric-sub">Métriques par champ<br>avec barres ASCII</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">eval_report.html</div>
+        <div class="metric-value" style="font-size:1.1rem;">HTML</div>
+        <div class="metric-sub">Dashboard visuel<br>détail par CV + erreurs</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">eval_results.json</div>
+        <div class="metric-value" style="font-size:1.1rem;">JSON</div>
+        <div class="metric-sub">Résultats bruts<br>exploitables programmatiquement</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLI -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2>CLI — Commandes</h2>
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:.6rem;">cv_parser.py</div>
+      <div style="display:flex;flex-direction:column;gap:.4rem;">
+        <code style="display:block;background:var(--bg);padding:.5rem .75rem;border-radius:6px;font-size:12px;">python cv_parser.py cv.pdf</code>
+        <code style="display:block;background:var(--bg);padding:.5rem .75rem;border-radius:6px;font-size:12px;">python cv_parser.py cv_scanné.jpg</code>
+        <code style="display:block;background:var(--bg);padding:.5rem .75rem;border-radius:6px;font-size:12px;">python cv_parser.py cv.docx openai/gpt-oss-120b</code>
+      </div>
+    </div>
+    <div class="card" style="margin-top:.75rem;">
+      <div class="card-title" style="margin-bottom:.6rem;">cv_evaluator.py</div>
+      <div style="display:flex;flex-direction:column;gap:.4rem;">
+        <code style="display:block;background:var(--bg);padding:.5rem .75rem;border-radius:6px;font-size:12px;">python cv_evaluator.py --ground-truth ground_truth.json</code>
+        <code style="display:block;background:var(--bg);padding:.5rem .75rem;border-radius:6px;font-size:12px;">python cv_evaluator.py --model llama-3.3-70b-versatile --report rapport.html</code>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

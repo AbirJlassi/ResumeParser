@@ -1,0 +1,501 @@
+{
+  "model": "llama-3.1-8b-instant",
+  "metrics": {
+    "full_name": {
+      "exact_match": 1.0,
+      "type": "scalar"
+    },
+    "email": {
+      "exact_match": 1.0,
+      "type": "scalar"
+    },
+    "phone": {
+      "exact_match": 1.0,
+      "type": "scalar"
+    },
+    "location": {
+      "exact_match": 0.42857142857142855,
+      "type": "scalar"
+    },
+    "linkedin": {
+      "exact_match": 1.0,
+      "type": "scalar"
+    },
+    "github": {
+      "exact_match": 1.0,
+      "type": "scalar"
+    },
+    "skills": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "type": "list"
+    },
+    "certifications": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "type": "list"
+    },
+    "experiences": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "type": "list"
+    },
+    "education": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "type": "list"
+    }
+  },
+  "performance": {
+    "avg_latency_s": 3.1797919713925302,
+    "failed_parses": 0,
+    "total_cvs": 7
+  },
+  "per_sample": [
+    {
+      "id": "cv_001",
+      "full_name": {
+        "match": true,
+        "predicted": "Aymen Ben Salah",
+        "expected": "Aymen Ben Salah",
+        "type": "scalar"
+      },
+      "email": {
+        "match": true,
+        "predicted": "aymen.bensalah@email.com",
+        "expected": "aymen.bensalah@email.com",
+        "type": "scalar"
+      },
+      "phone": {
+        "match": true,
+        "predicted": "+216 22 333 444",
+        "expected": "+216 22 333 444",
+        "type": "scalar"
+      },
+      "location": {
+        "match": false,
+        "predicted": "Tunisie",
+        "expected": "Tunis, Tunisie",
+        "type": "scalar"
+      },
+      "linkedin": {
+        "match": true,
+        "predicted": "linkedin.com/in/aymen-ben-salah",
+        "expected": "linkedin.com/in/aymen-ben-salah",
+        "type": "scalar"
+      },
+      "github": {
+        "match": true,
+        "predicted": "github.com/aymen-bs",
+        "expected": "github.com/aymen-bs",
+        "type": "scalar"
+      },
+      "skills": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "list"
+      },
+      "certifications": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "list"
+      },
+      "experiences": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "struct"
+      },
+      "education": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "struct"
+      }
+    },
+    {
+      "id": "cv_002",
+      "full_name": {
+        "match": true,
+        "predicted": "Sarah Mitchell",
+        "expected": "Sarah Mitchell",
+        "type": "scalar"
+      },
+      "email": {
+        "match": true,
+        "predicted": "sarah.mitchell@gmail.com",
+        "expected": "sarah.mitchell@gmail.com",
+        "type": "scalar"
+      },
+      "phone": {
+        "match": true,
+        "predicted": "+33 6 12 34 56 78",
+        "expected": "+33 6 12 34 56 78",
+        "type": "scalar"
+      },
+      "location": {
+        "match": true,
+        "predicted": "Paris, France",
+        "expected": "Paris, France",
+        "type": "scalar"
+      },
+      "linkedin": {
+        "match": true,
+        "predicted": "linkedin.com/in/sarah-mitchell-ds",
+        "expected": "linkedin.com/in/sarah-mitchell-ds",
+        "type": "scalar"
+      },
+      "github": {
+        "match": true,
+        "predicted": "github.com/smitchell-ds",
+        "expected": "github.com/smitchell-ds",
+        "type": "scalar"
+      },
+      "skills": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "list"
+      },
+      "certifications": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "list"
+      },
+      "experiences": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "struct"
+      },
+      "education": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "struct"
+      }
+    },
+    {
+      "id": "cv_003",
+      "full_name": {
+        "match": true,
+        "predicted": "Nour Trabelsi",
+        "expected": "Nour Trabelsi",
+        "type": "scalar"
+      },
+      "email": {
+        "match": true,
+        "predicted": "nour.trabelsi@outlook.com",
+        "expected": "nour.trabelsi@outlook.com",
+        "type": "scalar"
+      },
+      "phone": {
+        "match": true,
+        "predicted": "(+216) 55-987-654",
+        "expected": "(+216) 55-987-654",
+        "type": "scalar"
+      },
+      "location": {
+        "match": false,
+        "predicted": "Sfax, Tunisie\n\nJeune",
+        "expected": "Sfax, Tunisie",
+        "type": "scalar"
+      },
+      "linkedin": {
+        "match": true,
+        "predicted": null,
+        "expected": null,
+        "type": "scalar"
+      },
+      "github": {
+        "match": true,
+        "predicted": null,
+        "expected": null,
+        "type": "scalar"
+      },
+      "skills": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "list"
+      },
+      "certifications": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "list"
+      },
+      "experiences": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "struct"
+      },
+      "education": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "struct"
+      }
+    },
+    {
+      "id": "cv_004",
+      "full_name": {
+        "match": true,
+        "predicted": "Karim Ouali",
+        "expected": "Karim Ouali",
+        "type": "scalar"
+      },
+      "email": {
+        "match": true,
+        "predicted": "karim.ouali@protonmail.com",
+        "expected": "karim.ouali@protonmail.com",
+        "type": "scalar"
+      },
+      "phone": {
+        "match": true,
+        "predicted": "+212 661 234 567",
+        "expected": "+212 661 234 567",
+        "type": "scalar"
+      },
+      "location": {
+        "match": true,
+        "predicted": "Casablanca, Morocco",
+        "expected": "Casablanca, Morocco",
+        "type": "scalar"
+      },
+      "linkedin": {
+        "match": true,
+        "predicted": "linkedin.com/in/karim-ouali",
+        "expected": "linkedin.com/in/karim-ouali",
+        "type": "scalar"
+      },
+      "github": {
+        "match": true,
+        "predicted": "github.com/kouali-devops",
+        "expected": "github.com/kouali-devops",
+        "type": "scalar"
+      },
+      "skills": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "list"
+      },
+      "certifications": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "list"
+      },
+      "experiences": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "struct"
+      },
+      "education": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "struct"
+      }
+    },
+    {
+      "id": "cv_005",
+      "full_name": {
+        "match": true,
+        "predicted": "Leila Mansouri",
+        "expected": "Leila Mansouri",
+        "type": "scalar"
+      },
+      "email": {
+        "match": true,
+        "predicted": "leila.mansouri@gmail.com",
+        "expected": "Leila.Mansouri@gmail.com",
+        "type": "scalar"
+      },
+      "phone": {
+        "match": true,
+        "predicted": "06 78 90 12 34",
+        "expected": "06 78 90 12 34",
+        "type": "scalar"
+      },
+      "location": {
+        "match": true,
+        "predicted": "Lyon, France",
+        "expected": "Lyon, France",
+        "type": "scalar"
+      },
+      "linkedin": {
+        "match": true,
+        "predicted": "linkedin.com/in/leila-mansouri-pm",
+        "expected": "linkedin.com/in/leila-mansouri-pm",
+        "type": "scalar"
+      },
+      "github": {
+        "match": true,
+        "predicted": null,
+        "expected": null,
+        "type": "scalar"
+      },
+      "skills": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "list"
+      },
+      "certifications": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "list"
+      },
+      "experiences": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "struct"
+      },
+      "education": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "struct"
+      }
+    },
+    {
+      "id": "cv_006",
+      "full_name": {
+        "match": true,
+        "predicted": "Omar Chahed",
+        "expected": "Omar Chahed",
+        "type": "scalar"
+      },
+      "email": {
+        "match": true,
+        "predicted": "omarchahed@hotmail.com",
+        "expected": "omarchahed@hotmail.com",
+        "type": "scalar"
+      },
+      "phone": {
+        "match": true,
+        "predicted": null,
+        "expected": null,
+        "type": "scalar"
+      },
+      "location": {
+        "match": false,
+        "predicted": "Berlin",
+        "expected": "Berlin, Germany",
+        "type": "scalar"
+      },
+      "linkedin": {
+        "match": true,
+        "predicted": null,
+        "expected": null,
+        "type": "scalar"
+      },
+      "github": {
+        "match": true,
+        "predicted": null,
+        "expected": null,
+        "type": "scalar"
+      },
+      "skills": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "list"
+      },
+      "certifications": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "list"
+      },
+      "experiences": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "struct"
+      },
+      "education": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "struct"
+      }
+    },
+    {
+      "id": "cv_007",
+      "full_name": {
+        "match": true,
+        "predicted": "Fatima Zahra El Amrani",
+        "expected": "Fatima Zahra El Amrani",
+        "type": "scalar"
+      },
+      "email": {
+        "match": true,
+        "predicted": "fatima.elamrani@outlook.com",
+        "expected": "fatima.elamrani@outlook.com",
+        "type": "scalar"
+      },
+      "phone": {
+        "match": true,
+        "predicted": "+212 522 987 654",
+        "expected": "+212 522 987 654",
+        "type": "scalar"
+      },
+      "location": {
+        "match": false,
+        "predicted": "Fatima",
+        "expected": "Rabat, Maroc",
+        "type": "scalar"
+      },
+      "linkedin": {
+        "match": true,
+        "predicted": "linkedin.com/in/fz-elamrani",
+        "expected": "linkedin.com/in/fz-elamrani",
+        "type": "scalar"
+      },
+      "github": {
+        "match": true,
+        "predicted": "github.com/fzelamrani",
+        "expected": "github.com/fzelamrani",
+        "type": "scalar"
+      },
+      "skills": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "list"
+      },
+      "certifications": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "list"
+      },
+      "experiences": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "struct"
+      },
+      "education": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "type": "struct"
+      }
+    }
+  ]
+}

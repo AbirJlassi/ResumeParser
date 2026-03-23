@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CV Parser — Évaluation</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f172a;color:#e2e8f0;padding:2rem}
+h1{font-size:1.8rem;font-weight:700;color:#f8fafc;margin-bottom:.3rem}
+h2{font-size:1.05rem;font-weight:600;color:#94a3b8;margin:2rem 0 .8rem;text-transform:uppercase;letter-spacing:.05em}
+.sub{color:#64748b;font-size:.85rem;margin-bottom:2rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:1rem;margin-bottom:2rem}
+.card{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:1.1rem}
+.card-label{font-size:.72rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem}
+.card-value{font-size:1.55rem;font-weight:700}
+.green{color:#22c55e}.yellow{color:#f59e0b}.red{color:#ef4444}.blue{color:#60a5fa}
+table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden;margin-bottom:1rem}
+th{background:#0f172a;color:#94a3b8;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;padding:.75rem 1rem;text-align:left}
+td{padding:.7rem 1rem;border-bottom:1px solid #0f172a;font-size:.88rem;background:#1e293b}
+tr:hover td{background:#263248}
+.c{text-align:center}
+.badge{display:inline-block;padding:.2rem .7rem;border-radius:999px;font-size:.75rem;font-weight:600;background:#1d4ed8;color:#bfdbfe}
+</style></head><body>
+<h1>📊 Rapport d'Évaluation — CV Parser</h1>
+<p class="sub">
+  Pipeline : <span class="badge">Regex → NER → LLM → Post-processing</span>
+  &nbsp;|&nbsp; Modèle LLM : <strong>llama-3.1-8b-instant</strong>
+</p>
+
+<div class="cards">
+  <div class="card"><div class="card-label">Score Scalaires</div>
+    <div class="card-value green">90%</div>
+    <div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Exact Match moyen</div></div>
+  <div class="card"><div class="card-label">Score Listes</div>
+    <div class="card-value green">100%</div>
+    <div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">F1 moyen</div></div>
+  <div class="card"><div class="card-label">Latence moy.</div>
+    <div class="card-value blue">3.18s</div></div>
+  <div class="card"><div class="card-label">Erreurs</div>
+    <div class="card-value green">0</div>
+    <div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">CVs en erreur</div></div>
+</div>
+
+<h2>📋 Métriques par champ</h2>
+<table><thead><tr>
+  <th>Champ</th><th class="c">Métrique</th><th class="c">Score</th>
+  <th class="c">P / R</th><th class="c">Barre</th>
+</tr></thead><tbody><tr><td><strong>full_name</strong></td><td class='c'>Exact Match</td><td class='c' style='color:#22c55e;font-weight:700'>1.000</td><td class='c'>—</td><td class='c'><div style="background:#1e293b;border-radius:4px;height:10px;width:160px;display:inline-block;vertical-align:middle"><div style="background:#22c55e;height:10px;border-radius:4px;width:160px"></div></div></td></tr><tr><td><strong>email</strong></td><td class='c'>Exact Match</td><td class='c' style='color:#22c55e;font-weight:700'>1.000</td><td class='c'>—</td><td class='c'><div style="background:#1e293b;border-radius:4px;height:10px;width:160px;display:inline-block;vertical-align:middle"><div style="background:#22c55e;height:10px;border-radius:4px;width:160px"></div></div></td></tr><tr><td><strong>phone</strong></td><td class='c'>Exact Match</td><td class='c' style='color:#22c55e;font-weight:700'>1.000</td><td class='c'>—</td><td class='c'><div style="background:#1e293b;border-radius:4px;height:10px;width:160px;display:inline-block;vertical-align:middle"><div style="background:#22c55e;height:10px;border-radius:4px;width:160px"></div></div></td></tr><tr><td><strong>location</strong></td><td class='c'>Exact Match</td><td class='c' style='color:#ef4444;font-weight:700'>0.429</td><td class='c'>—</td><td class='c'><div style="background:#1e293b;border-radius:4px;height:10px;width:160px;display:inline-block;vertical-align:middle"><div style="background:#ef4444;height:10px;border-radius:4px;width:69px"></div></div></td></tr><tr><td><strong>linkedin</strong></td><td class='c'>Exact Match</td><td class='c' style='color:#22c55e;font-weight:700'>1.000</td><td class='c'>—</td><td class='c'><div style="background:#1e293b;border-radius:4px;height:10px;width:160px;display:inline-block;vertical-align:middle"><div style="background:#22c55e;height:10px;border-radius:4px;width:160px"></div></div></td></tr><tr><td><strong>github</strong></td><td class='c'>Exact Match</td><td class='c' style='color:#22c55e;font-weight:700'>1.000</td><td class='c'>—</td><td class='c'><div style="background:#1e293b;border-radius:4px;height:10px;width:160px;display:inline-block;vertical-align:middle"><div style="background:#22c55e;height:10px;border-radius:4px;width:160px"></div></div></td></tr><tr><td><strong>skills</strong></td><td class='c'>F1</td><td class='c' style='color:#22c55e;font-weight:700'>1.000</td><td class='c'>P=1.000 / R=1.000</td><td class='c'><div style="background:#1e293b;border-radius:4px;height:10px;width:160px;display:inline-block;vertical-align:middle"><div style="background:#22c55e;height:10px;border-radius:4px;width:160px"></div></div></td></tr><tr><td><strong>certifications</strong></td><td class='c'>F1</td><td class='c' style='color:#22c55e;font-weight:700'>1.000</td><td class='c'>P=1.000 / R=1.000</td><td class='c'><div style="background:#1e293b;border-radius:4px;height:10px;width:160px;display:inline-block;vertical-align:middle"><div style="background:#22c55e;height:10px;border-radius:4px;width:160px"></div></div></td></tr><tr><td><strong>experiences</strong></td><td class='c'>F1</td><td class='c' style='color:#22c55e;font-weight:700'>1.000</td><td class='c'>P=1.000 / R=1.000</td><td class='c'><div style="background:#1e293b;border-radius:4px;height:10px;width:160px;display:inline-block;vertical-align:middle"><div style="background:#22c55e;height:10px;border-radius:4px;width:160px"></div></div></td></tr><tr><td><strong>education</strong></td><td class='c'>F1</td><td class='c' style='color:#22c55e;font-weight:700'>1.000</td><td class='c'>P=1.000 / R=1.000</td><td class='c'><div style="background:#1e293b;border-radius:4px;height:10px;width:160px;display:inline-block;vertical-align:middle"><div style="background:#22c55e;height:10px;border-radius:4px;width:160px"></div></div></td></tr></tbody></table>
+
+<h2>🔍 Détail par CV</h2>
+<table><thead><tr>
+  <th>CV</th><th class="c">Scalaires</th><th class="c">F1 listes</th><th>Erreurs détectées</th>
+</tr></thead><tbody><tr><td>cv_001</td><td class='c'>⚠️ 5/6</td><td class='c'>1.000 <div style="background:#1e293b;border-radius:4px;height:10px;width:160px;display:inline-block;vertical-align:middle"><div style="background:#22c55e;height:10px;border-radius:4px;width:160px"></div></div></td><td style='font-size:.8rem;color:#94a3b8'>location: prédit=<em>Tunisie</em> attendu=<em>Tunis, Tunisie</em></td></tr><tr><td>cv_002</td><td class='c'>✅ 6/6</td><td class='c'>1.000 <div style="background:#1e293b;border-radius:4px;height:10px;width:160px;display:inline-block;vertical-align:middle"><div style="background:#22c55e;height:10px;border-radius:4px;width:160px"></div></div></td><td style='font-size:.8rem;color:#94a3b8'>—</td></tr><tr><td>cv_003</td><td class='c'>⚠️ 5/6</td><td class='c'>1.000 <div style="background:#1e293b;border-radius:4px;height:10px;width:160px;display:inline-block;vertical-align:middle"><div style="background:#22c55e;height:10px;border-radius:4px;width:160px"></div></div></td><td style='font-size:.8rem;color:#94a3b8'>location: prédit=<em>Sfax, Tunisie
+
+Jeune</em> attendu=<em>Sfax, Tunisie</em></td></tr><tr><td>cv_004</td><td class='c'>✅ 6/6</td><td class='c'>1.000 <div style="background:#1e293b;border-radius:4px;height:10px;width:160px;display:inline-block;vertical-align:middle"><div style="background:#22c55e;height:10px;border-radius:4px;width:160px"></div></div></td><td style='font-size:.8rem;color:#94a3b8'>—</td></tr><tr><td>cv_005</td><td class='c'>✅ 6/6</td><td class='c'>1.000 <div style="background:#1e293b;border-radius:4px;height:10px;width:160px;display:inline-block;vertical-align:middle"><div style="background:#22c55e;height:10px;border-radius:4px;width:160px"></div></div></td><td style='font-size:.8rem;color:#94a3b8'>—</td></tr><tr><td>cv_006</td><td class='c'>⚠️ 5/6</td><td class='c'>1.000 <div style="background:#1e293b;border-radius:4px;height:10px;width:160px;display:inline-block;vertical-align:middle"><div style="background:#22c55e;height:10px;border-radius:4px;width:160px"></div></div></td><td style='font-size:.8rem;color:#94a3b8'>location: prédit=<em>Berlin</em> attendu=<em>Berlin, Germany</em></td></tr><tr><td>cv_007</td><td class='c'>⚠️ 5/6</td><td class='c'>1.000 <div style="background:#1e293b;border-radius:4px;height:10px;width:160px;display:inline-block;vertical-align:middle"><div style="background:#22c55e;height:10px;border-radius:4px;width:160px"></div></div></td><td style='font-size:.8rem;color:#94a3b8'>location: prédit=<em>Fatima</em> attendu=<em>Rabat, Maroc</em></td></tr></tbody></table>
+
+<h2>⚡ Performance</h2>
+<table><thead><tr><th>Métrique</th><th class="c">Valeur</th></tr></thead><tbody>
+<tr><td>Latence moyenne</td><td class="c">3.180 s</td></tr>
+<tr><td>CVs en erreur</td><td class="c">0</td></tr>
+<tr><td>CVs évalués</td><td class="c">7</td></tr>
+</tbody></table>
+</body></html>
